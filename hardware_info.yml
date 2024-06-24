@@ -1,0 +1,41 @@
+---
+- name: Collect and print hardware information
+  gather_facts: yes
+  tasks:
+    - name: Get CPU information
+      command: lscpu
+      register: cpu_info
+
+    - name: Get memory information
+      command: free -h
+      register: memory_info
+
+    - name: Get disk information
+      command: df -h
+      register: disk_info
+
+    - name: Get network information
+      command: ip addr
+      register: network_info
+
+    - name: Get system information
+      command: uname -a
+      register: system_info
+
+    - name: Print hardware information
+      debug:
+        msg:
+          - "CPU Information:"
+          - "{{ cpu_info.stdout_lines }}"
+          - ""
+          - "Memory Information:"
+          - "{{ memory_info.stdout_lines }}"
+          - ""
+          - "Disk Information:"
+          - "{{ disk_info.stdout_lines }}"
+          - ""
+          - "Network Information:"
+          - "{{ network_info.stdout_lines }}"
+          - ""
+          - "System Information:"
+          - "{{ system_info.stdout_lines }}"
