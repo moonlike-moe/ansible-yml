@@ -1,6 +1,6 @@
 ---
 - name: Collect and print hardware information
-  hosts: 全部
+  hosts: all
   gather_facts: yes
   tasks:
     - name: Get CPU information
